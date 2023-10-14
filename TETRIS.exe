@@ -1,0 +1,59 @@
+# 1 "C:\\Users\\jmhlo\\TETRIS\\TETRIS.CPP"
+# 1 "C:\\Users\\jmhlo\\TETRIS//"
+# 1 "<built-in>"
+# 1 "<command-line>"
+# 1 "C:\\Users\\jmhlo\\TETRIS\\TETRIS.CPP"
+class GameTable{
+private:
+    int x;
+    int y;
+    std::vector<std::vector<int>> table;
+public:
+    GameTable(int x, int y){
+      this -> x = x;
+      this -> y = y;
+
+      for(int i = 0; i < y; i++){
+        std::vector<int> temp;
+        for(int j = 0; j < x; j++){
+          temp.push_back(0);
+        }
+        table.push_back(temp);
+      }
+
+
+      for(int i = 0; i < x; i++){
+        table[0][i] = 1;
+        table[y - 1][i] = 1;
+      }
+
+      for(int i = 1; i < y - 1; i++){
+        table[i][0] = 1;
+        table[i][x - 1] = 1;
+      }
+    }
+
+    void DrawGameTable(){
+      for(int i = 0; i < y; i++){
+        for(int j = 0; j < x; j++){
+          if(table[i][j] == 1){
+            std::cout << "▦";
+          }
+          else{
+            std::cout << "  ";
+          }
+        }
+        std::cout << "\n";
+      }
+    }
+};
+
+int main(void){
+  system("mode con cols = 100 lines = 40 | TITLE 테트리스 게임");
+  GameTable gt(Table_x, Table_y);
+  MainMenu();
+  gt.DrawGameTable();
+  getchar();
+
+  return 0;
+}
